@@ -53,6 +53,7 @@ public class PlayerController : MonoBehaviour
         {
             playerState.SetPlayerMovementState(PlayerMovementState.Sprinting);
         }
+
         else if (isMoving)
         {
             playerState.SetPlayerMovementState(PlayerMovementState.Running);
@@ -60,6 +61,15 @@ public class PlayerController : MonoBehaviour
         else
         {
             playerState.SetPlayerMovementState(PlayerMovementState.Idling);
+        }
+
+        if (!GetIsGrounded() && velocity.y >= 0f)
+        {
+            playerState.SetPlayerMovementState(PlayerMovementState.Jumping);
+        }
+        else if (!GetIsGrounded() && velocity.y < 0f)
+        {
+            playerState.SetPlayerMovementState(PlayerMovementState.Falling);
         }
     }
 
@@ -108,9 +118,14 @@ public class PlayerController : MonoBehaviour
 
     private void Jump()
     {
-        if (jumpAction.WasPressedThisFrame() && controller.isGrounded)
+        if (jumpAction.WasPressedThisFrame() && GetIsGrounded())
         {
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
         }
+    }
+
+    public bool GetIsGrounded()
+    {
+        return controller.isGrounded;
     }
 }

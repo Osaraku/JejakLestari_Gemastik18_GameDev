@@ -9,10 +9,12 @@ public class PlayerAnimation : MonoBehaviour
     private PlayerController playerController;
     private PlayerState playerState;
 
-    private static int isMovingHash = Animator.StringToHash("isMoving");
+    private static int isGroundedHash = Animator.StringToHash("isGrounded");
+    private static int isIdlingHash = Animator.StringToHash("isIdling");
+    private static int isRunningHash = Animator.StringToHash("isRunning");
     private static int isSprintingHash = Animator.StringToHash("isSprinting");
-
-    private Vector3 currentBlendInput = Vector3.zero;
+    private static int isJumpingHash = Animator.StringToHash("isJumping");
+    private static int isFallingHash = Animator.StringToHash("isFalling");
 
     private void Awake()
     {
@@ -27,25 +29,18 @@ public class PlayerAnimation : MonoBehaviour
 
     private void UpdateAnimationState()
     {
-        if (playerState.currentPlayerMovementState == PlayerMovementState.Idling)
-        {
-            animator.SetBool(isMovingHash, false);
-        }
+        bool isGrounded = playerController.GetIsGrounded();
+        bool isIdling = playerState.currentPlayerMovementState == PlayerMovementState.Idling;
+        bool isRunning = playerState.currentPlayerMovementState == PlayerMovementState.Running;
+        bool isSprinting = playerState.currentPlayerMovementState == PlayerMovementState.Sprinting;
+        bool isJumping = playerState.currentPlayerMovementState == PlayerMovementState.Jumping;
+        bool isFalling = playerState.currentPlayerMovementState == PlayerMovementState.Falling;
 
-        if (playerState.currentPlayerMovementState == PlayerMovementState.Running)
-        {
-            animator.SetBool(isMovingHash, true);
-        }
-
-        if (playerState.currentPlayerMovementState == PlayerMovementState.Sprinting)
-        {
-            animator.SetBool(isMovingHash, true);
-            animator.SetBool(isSprintingHash, true);
-        }
-        else
-        {
-            animator.SetBool(isSprintingHash, false);
-        }
-
+        animator.SetBool(isGroundedHash, isGrounded);
+        animator.SetBool(isIdlingHash, isIdling);
+        animator.SetBool(isRunningHash, isRunning);
+        animator.SetBool(isSprintingHash, isSprinting);
+        animator.SetBool(isJumpingHash, isJumping);
+        animator.SetBool(isFallingHash, isFalling);
     }
 }
