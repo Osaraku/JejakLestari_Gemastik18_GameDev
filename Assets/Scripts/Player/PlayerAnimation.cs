@@ -4,7 +4,6 @@ using UnityEngine;
 public class PlayerAnimation : MonoBehaviour
 {
     [SerializeField] private Animator animator;
-    [SerializeField] private float animationBlendSpeed = 10f;
 
     private PlayerController playerController;
     private PlayerState playerState;
