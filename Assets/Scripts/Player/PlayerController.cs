@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour
     private InputAction moveAction;
     private InputAction sprintAction;
     private InputAction jumpAction;
+    private InputAction interactAction;
     private Vector3 velocity;
 
     private bool isMoving;
@@ -37,6 +38,7 @@ public class PlayerController : MonoBehaviour
         moveAction = InputSystem.actions.FindAction("Move");
         sprintAction = InputSystem.actions.FindAction("Sprint");
         jumpAction = InputSystem.actions.FindAction("Jump");
+        interactAction = InputSystem.actions.FindAction("Interact");
     }
 
     private void Update()
@@ -45,6 +47,7 @@ public class PlayerController : MonoBehaviour
         Move();
         Sprint();
         Jump();
+        Interact();
     }
 
     private void UpdateMovementState()
@@ -121,6 +124,14 @@ public class PlayerController : MonoBehaviour
         if (jumpAction.WasPressedThisFrame() && GetIsGrounded())
         {
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+        }
+    }
+
+    private void Interact()
+    {
+        if (interactAction.WasPressedThisFrame() && GetIsGrounded())
+        {
+            playerState.SetPlayerMovementState(PlayerMovementState.Gathering);
         }
     }
 

@@ -14,6 +14,7 @@ public class PlayerAnimation : MonoBehaviour
     private static int isSprintingHash = Animator.StringToHash("isSprinting");
     private static int isJumpingHash = Animator.StringToHash("isJumping");
     private static int isFallingHash = Animator.StringToHash("isFalling");
+    private static int isGatheringHash = Animator.StringToHash("isGathering");
 
     private void Awake()
     {
@@ -34,6 +35,7 @@ public class PlayerAnimation : MonoBehaviour
         bool isSprinting = playerState.currentPlayerMovementState == PlayerMovementState.Sprinting;
         bool isJumping = playerState.currentPlayerMovementState == PlayerMovementState.Jumping;
         bool isFalling = playerState.currentPlayerMovementState == PlayerMovementState.Falling;
+        bool isGathering = playerState.currentPlayerMovementState == PlayerMovementState.Gathering;
 
         animator.SetBool(isGroundedHash, isGrounded);
         animator.SetBool(isIdlingHash, isIdling);
@@ -41,5 +43,6 @@ public class PlayerAnimation : MonoBehaviour
         animator.SetBool(isSprintingHash, isSprinting);
         animator.SetBool(isJumpingHash, isJumping);
         animator.SetBool(isFallingHash, isFalling);
+        animator.SetBool(isGatheringHash, isGathering);
     }
 }
