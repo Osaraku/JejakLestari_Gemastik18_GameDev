@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -14,6 +15,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float gravity = -9.8f;
     [SerializeField] private Transform cameraOrientation;
     [SerializeField] private bool shouldFaceMoveDirection = true;
+    [SerializeField] private InventoryUI inventoryUI;
 
     private CharacterController controller;
     private PlayerState playerState;
@@ -22,14 +24,17 @@ public class PlayerController : MonoBehaviour
     private InputAction jumpAction;
     private InputAction interactAction;
     private Vector3 velocity;
+    private PlayerInventory playerInventory;
 
     private bool isMoving;
     private bool isSprinting;
 
     private void Awake()
     {
+        Instance = this;
         controller = GetComponent<CharacterController>();
         playerState = GetComponent<PlayerState>();
+        playerInventory = new PlayerInventory(UseItem);
     }
 
     private void Start()
@@ -39,6 +44,8 @@ public class PlayerController : MonoBehaviour
         sprintAction = InputSystem.actions.FindAction("Sprint");
         jumpAction = InputSystem.actions.FindAction("Jump");
         interactAction = InputSystem.actions.FindAction("Interact");
+
+        inventoryUI.SetInventory(playerInventory);
     }
 
     private void Update()
@@ -131,7 +138,57 @@ public class PlayerController : MonoBehaviour
     {
         if (interactAction.WasPressedThisFrame() && GetIsGrounded())
         {
-            playerState.SetPlayerMovementState(PlayerMovementState.Gathering);
+            IInteractable interactable = GetInteractableObject();
+            if (interactable != null)
+            {
+                interactable.Interact();
+            }
+        }
+    }
+
+    public IInteractable GetInteractableObject()
+    {
+        List<IInteractable> interactableList = new List<IInteractable>();
+        float interactRange = 1f;
+        Collider[] colliderArray = Physics.OverlapSphere(transform.position, interactRange);
+        foreach (Collider collider in colliderArray)
+        {
+            if (collider.TryGetComponent(out IInteractable interactable))
+            {
+                interactableList.Add(interactable);
+            }
+        }
+
+        IInteractable closestInteractable = null;
+        foreach (IInteractable interactable in interactableList)
+        {
+            if (closestInteractable == null)
+            {
+                closestInteractable = interactable;
+            }
+            else
+            {
+                if (Vector3.Distance(transform.position, interactable.GetTransform().position) < Vector3.Distance(transform.position, closestInteractable.GetTransform().position))
+                {
+                    closestInteractable = interactable;
+                }
+            }
+        }
+        return closestInteractable;
+    }
+
+    public PlayerInventory GetPlayerInventory()
+    {
+        return playerInventory;
+    }
+
+    private void UseItem(Item item)
+    {
+        switch (item.itemType)
+        {
+            case Item.ItemType.BottleTrash:
+                playerInventory.RemoveItem(new Item { itemType = Item.ItemType.BottleTrash, amount = 1 });
+                break;
         }
     }
 
