@@ -21,11 +21,23 @@ public class CollectTrashQuestStep : QuestStep
         if (trashCollected < trashToComplete)
         {
             trashCollected++;
-            Debug.Log("collected");
+            UpdateState();
         }
         if (trashCollected >= trashToComplete)
         {
             finishQuestStep();
         }
+    }
+
+    private void UpdateState()
+    {
+        string state = trashCollected.ToString();
+        ChangeState(state);
+    }
+
+    protected override void SetQuestStepState(string state)
+    {
+        this.trashCollected = System.Int32.Parse(state);
+        UpdateState();
     }
 }

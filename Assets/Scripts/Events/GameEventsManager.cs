@@ -8,6 +8,7 @@ public class GameEventsManager : MonoBehaviour
     public TrashEvents trashEvents;
     public InventoryEvents inventoryEvents;
     public PlayerEvents playerEvents;
+    public NPCEvents npcEvents;
     public QuestEvents questEvents;
 
     private void Awake()
@@ -22,6 +23,7 @@ public class GameEventsManager : MonoBehaviour
         trashEvents = new TrashEvents();
         inventoryEvents = new InventoryEvents();
         playerEvents = new PlayerEvents();
+        npcEvents = new NPCEvents();
         questEvents = new QuestEvents();
     }
 }

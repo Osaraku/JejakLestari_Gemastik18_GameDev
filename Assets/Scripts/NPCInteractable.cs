@@ -4,6 +4,7 @@ using UnityEngine;
 public class NPCInteractable : MonoBehaviour, IInteractable
 {
     [SerializeField] private Animator animator;
+    [SerializeField] private string npcName;
     [SerializeField] private string interactText;
 
     private static int isIdlingHash = Animator.StringToHash("isIdling");
@@ -16,6 +17,7 @@ public class NPCInteractable : MonoBehaviour, IInteractable
     public void Interact()
     {
         animator.SetBool(isTalkingHash, true);
+        GameEventsManager.Instance.npcEvents.NPCInteracted(npcName);
     }
 
     public string GetInteractText()
@@ -26,5 +28,10 @@ public class NPCInteractable : MonoBehaviour, IInteractable
     public Transform GetTransform()
     {
         return transform;
+    }
+
+    public string GetNPCName()
+    {
+        return npcName;
     }
 }

@@ -19,7 +19,7 @@ public class QuestInfoSO : ScriptableObject
 
     [Header("Rewards")]
     public int moneyReward;
-    public int reputationReward;
+    public int experienceReward;
 
     private void OnValidate()
     {

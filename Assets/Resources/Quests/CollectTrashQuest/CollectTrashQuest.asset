@@ -18,5 +18,6 @@ MonoBehaviour:
   questPrerequisites: []
   questStepPrefabs:
   - {fileID: 5279521666318308140, guid: edeb65684412f424ab115f034e88b084, type: 3}
+  - {fileID: 5279521666318308140, guid: edeb65684412f424ab115f034e88b084, type: 3}
   moneyReward: 10000
-  reputationReward: 20
+  experienceReward: 40
