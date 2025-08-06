@@ -13,7 +13,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float sprintSpeedIncrease = 2f;
     [SerializeField] private float jumpHeight = 2f;
     [SerializeField] private float gravity = -9.8f;
-    [SerializeField] private Transform cameraOrientation;
+    [SerializeField] private Transform thirdPersonCamera;
+    [SerializeField] private Transform firstPersonCamera;
     [SerializeField] private bool shouldFaceMoveDirection = true;
     [SerializeField] private InventoryUI inventoryUI;
 
@@ -23,9 +24,13 @@ public class PlayerController : MonoBehaviour
     private InputAction sprintAction;
     private InputAction jumpAction;
     private InputAction interactAction;
+    private InputAction photoCameraAction;
+    private InputAction journalCameraAction;
     private Vector3 velocity;
     private PlayerInventory playerInventory;
+    private Transform cameraOrientation;
 
+    private bool canMove = true;
     private bool isMoving;
     private bool isSprinting;
 
@@ -44,17 +49,24 @@ public class PlayerController : MonoBehaviour
         sprintAction = InputSystem.actions.FindAction("Sprint");
         jumpAction = InputSystem.actions.FindAction("Jump");
         interactAction = InputSystem.actions.FindAction("Interact");
+        photoCameraAction = InputSystem.actions.FindAction("PhotoCamera");
+        journalCameraAction = InputSystem.actions.FindAction("JournalCamera");
 
+        cameraOrientation = thirdPersonCamera;
         inventoryUI.SetInventory(playerInventory);
     }
 
     private void Update()
     {
-        UpdateMovementState();
-        Move();
-        Sprint();
-        Jump();
-        Interact();
+        if (canMove)
+        {
+            UpdateMovementState();
+            Move();
+            Sprint();
+            Jump();
+            Interact();
+        }
+        ChangeCamera();
     }
 
     private void UpdateMovementState()
@@ -131,6 +143,45 @@ public class PlayerController : MonoBehaviour
         if (jumpAction.WasPressedThisFrame() && GetIsGrounded())
         {
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+        }
+    }
+
+    private void ChangeCamera()
+    {
+        FirstPersonCameraController fpController = firstPersonCamera.GetComponent<FirstPersonCameraController>();
+
+        if (photoCameraAction.WasPressedThisFrame() && GetIsGrounded())
+        {
+            if (cameraOrientation == thirdPersonCamera)
+            {
+                cameraOrientation = firstPersonCamera;
+                fpController.SetInitialRotation(transform.eulerAngles.y, transform.eulerAngles.x);
+                fpController.SetCanRotate(true);
+            }
+            else
+            {
+                cameraOrientation = thirdPersonCamera;
+            }
+            GameEventsManager.Instance.cameraEvents.CameraTransitioned();
+        }
+
+        if (journalCameraAction.WasPressedThisFrame() && GetIsGrounded())
+        {
+            if (cameraOrientation == thirdPersonCamera)
+            {
+                cameraOrientation = firstPersonCamera;
+                fpController.SetInitialRotation(transform.eulerAngles.y, transform.eulerAngles.x);
+
+                fpController.SetCanRotate(false);
+                canMove = false;
+            }
+            else
+            {
+                cameraOrientation = thirdPersonCamera;
+                Cursor.lockState = CursorLockMode.Locked;
+                canMove = true;
+            }
+            GameEventsManager.Instance.cameraEvents.CameraTransitioned();
         }
     }
 

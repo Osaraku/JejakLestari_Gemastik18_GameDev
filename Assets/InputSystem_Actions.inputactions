@@ -1012,6 +1012,24 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "PhotoCamera",
+                    "type": "Button",
+                    "id": "3539e0e2-74c0-4b72-a917-c2c26da63ab8",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "JournalCamera",
+                    "type": "Button",
+                    "id": "d355c9cb-2e42-4247-8efb-8d933dbe38cd",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -1058,6 +1076,28 @@
                     "action": "GamepadZoom",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "fbe970fe-d11a-48ca-a988-732df929d828",
+                    "path": "<Keyboard>/c",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "PhotoCamera",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "cd209563-2c17-456f-aa6b-159188e8bf6c",
+                    "path": "<Keyboard>/tab",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "JournalCamera",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }

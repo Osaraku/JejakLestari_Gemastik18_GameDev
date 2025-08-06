@@ -10,6 +10,7 @@ public class GameEventsManager : MonoBehaviour
     public PlayerEvents playerEvents;
     public NPCEvents npcEvents;
     public QuestEvents questEvents;
+    public CameraEvents cameraEvents;
 
     private void Awake()
     {
@@ -25,5 +26,6 @@ public class GameEventsManager : MonoBehaviour
         playerEvents = new PlayerEvents();
         npcEvents = new NPCEvents();
         questEvents = new QuestEvents();
+        cameraEvents = new CameraEvents();
     }
 }

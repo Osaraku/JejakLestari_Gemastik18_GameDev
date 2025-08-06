@@ -1098,6 +1098,24 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""PhotoCamera"",
+                    ""type"": ""Button"",
+                    ""id"": ""3539e0e2-74c0-4b72-a917-c2c26da63ab8"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""JournalCamera"",
+                    ""type"": ""Button"",
+                    ""id"": ""d355c9cb-2e42-4247-8efb-8d933dbe38cd"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -1144,6 +1162,28 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""action"": ""GamepadZoom"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fbe970fe-d11a-48ca-a988-732df929d828"",
+                    ""path"": ""<Keyboard>/c"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard&Mouse"",
+                    ""action"": ""PhotoCamera"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""cd209563-2c17-456f-aa6b-159188e8bf6c"",
+                    ""path"": ""<Keyboard>/tab"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard&Mouse"",
+                    ""action"": ""JournalCamera"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -1238,6 +1278,8 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         m_CameraControl = asset.FindActionMap("CameraControl", throwIfNotFound: true);
         m_CameraControl_MouseZoom = m_CameraControl.FindAction("MouseZoom", throwIfNotFound: true);
         m_CameraControl_GamepadZoom = m_CameraControl.FindAction("GamepadZoom", throwIfNotFound: true);
+        m_CameraControl_PhotoCamera = m_CameraControl.FindAction("PhotoCamera", throwIfNotFound: true);
+        m_CameraControl_JournalCamera = m_CameraControl.FindAction("JournalCamera", throwIfNotFound: true);
     }
 
     ~@InputSystem_Actions()
@@ -1701,6 +1743,8 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
     private List<ICameraControlActions> m_CameraControlActionsCallbackInterfaces = new List<ICameraControlActions>();
     private readonly InputAction m_CameraControl_MouseZoom;
     private readonly InputAction m_CameraControl_GamepadZoom;
+    private readonly InputAction m_CameraControl_PhotoCamera;
+    private readonly InputAction m_CameraControl_JournalCamera;
     /// <summary>
     /// Provides access to input actions defined in input action map "CameraControl".
     /// </summary>
@@ -1720,6 +1764,14 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "CameraControl/GamepadZoom".
         /// </summary>
         public InputAction @GamepadZoom => m_Wrapper.m_CameraControl_GamepadZoom;
+        /// <summary>
+        /// Provides access to the underlying input action "CameraControl/PhotoCamera".
+        /// </summary>
+        public InputAction @PhotoCamera => m_Wrapper.m_CameraControl_PhotoCamera;
+        /// <summary>
+        /// Provides access to the underlying input action "CameraControl/JournalCamera".
+        /// </summary>
+        public InputAction @JournalCamera => m_Wrapper.m_CameraControl_JournalCamera;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -1752,6 +1804,12 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @GamepadZoom.started += instance.OnGamepadZoom;
             @GamepadZoom.performed += instance.OnGamepadZoom;
             @GamepadZoom.canceled += instance.OnGamepadZoom;
+            @PhotoCamera.started += instance.OnPhotoCamera;
+            @PhotoCamera.performed += instance.OnPhotoCamera;
+            @PhotoCamera.canceled += instance.OnPhotoCamera;
+            @JournalCamera.started += instance.OnJournalCamera;
+            @JournalCamera.performed += instance.OnJournalCamera;
+            @JournalCamera.canceled += instance.OnJournalCamera;
         }
 
         /// <summary>
@@ -1769,6 +1827,12 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @GamepadZoom.started -= instance.OnGamepadZoom;
             @GamepadZoom.performed -= instance.OnGamepadZoom;
             @GamepadZoom.canceled -= instance.OnGamepadZoom;
+            @PhotoCamera.started -= instance.OnPhotoCamera;
+            @PhotoCamera.performed -= instance.OnPhotoCamera;
+            @PhotoCamera.canceled -= instance.OnPhotoCamera;
+            @JournalCamera.started -= instance.OnJournalCamera;
+            @JournalCamera.performed -= instance.OnJournalCamera;
+            @JournalCamera.canceled -= instance.OnJournalCamera;
         }
 
         /// <summary>
@@ -2037,5 +2101,19 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnGamepadZoom(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "PhotoCamera" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnPhotoCamera(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "JournalCamera" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnJournalCamera(InputAction.CallbackContext context);
     }
 }

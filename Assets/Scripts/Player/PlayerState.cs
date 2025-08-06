@@ -19,4 +19,5 @@ public enum PlayerMovementState
     Jumping = 4,
     Falling = 5,
     Gathering = 6,
+    OpenCamera = 7,
 }
