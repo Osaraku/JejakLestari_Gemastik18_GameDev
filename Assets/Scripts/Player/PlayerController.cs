@@ -56,6 +56,15 @@ public class PlayerController : MonoBehaviour
         inventoryUI.SetInventory(playerInventory);
     }
 
+    private void OnEnable()
+    {
+        GameEventsManager.Instance.playerEvents.onPlayerMovementLock += SetMovementLock;
+    }
+    private void OnDisable()
+    {
+        GameEventsManager.Instance.playerEvents.onPlayerMovementLock -= SetMovementLock;
+    }
+
     private void Update()
     {
         if (canMove)
@@ -146,6 +155,11 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void SetMovementLock(bool isLocked)
+    {
+        canMove = !isLocked;
+    }
+
     private void ChangeCamera()
     {
         FirstPersonCameraController fpController = firstPersonCamera.GetComponent<FirstPersonCameraController>();
@@ -157,12 +171,14 @@ public class PlayerController : MonoBehaviour
                 cameraOrientation = firstPersonCamera;
                 fpController.SetInitialRotation(transform.eulerAngles.y, transform.eulerAngles.x);
                 fpController.SetCanRotate(true);
+
+                GameEventsManager.Instance.cameraEvents.CameraTransitionedToFirstPerson();
             }
             else
             {
                 cameraOrientation = thirdPersonCamera;
+                GameEventsManager.Instance.cameraEvents.CameraTransitionedToThirdPerson();
             }
-            GameEventsManager.Instance.cameraEvents.CameraTransitioned();
         }
 
         if (journalCameraAction.WasPressedThisFrame() && GetIsGrounded())
@@ -174,14 +190,15 @@ public class PlayerController : MonoBehaviour
 
                 fpController.SetCanRotate(false);
                 canMove = false;
+                GameEventsManager.Instance.cameraEvents.CameraTransitionedToFirstPerson();
             }
             else
             {
                 cameraOrientation = thirdPersonCamera;
                 Cursor.lockState = CursorLockMode.Locked;
                 canMove = true;
+                GameEventsManager.Instance.cameraEvents.CameraTransitionedToThirdPerson();
             }
-            GameEventsManager.Instance.cameraEvents.CameraTransitioned();
         }
     }
 

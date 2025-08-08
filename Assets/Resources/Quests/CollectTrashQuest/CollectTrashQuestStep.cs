@@ -6,6 +6,11 @@ public class CollectTrashQuestStep : QuestStep
     private int trashCollected = 0;
     private int trashToComplete = 5;
 
+    private void Start()
+    {
+        UpdateState();
+    }
+
     private void OnEnable()
     {
         GameEventsManager.Instance.trashEvents.onTrashCollected += TrashCollected;
@@ -32,7 +37,9 @@ public class CollectTrashQuestStep : QuestStep
     private void UpdateState()
     {
         string state = trashCollected.ToString();
-        ChangeState(state);
+        string status = "Terambil " + trashCollected + " / " + trashToComplete + " Sampah.";
+        ChangeState(state, status);
+        Debug.Log(status);
     }
 
     protected override void SetQuestStepState(string state)

@@ -2,8 +2,15 @@ using UnityEngine;
 
 public class CameraTransition : MonoBehaviour
 {
-    private void ChangeCamera()
+    private Animator animator;
+
+    private void ChangeCameraFirst()
     {
-        GameEventsManager.Instance.cameraEvents.CameraChanged();
+        GameEventsManager.Instance.cameraEvents.CameraChangedToFirstPerson();
+    }
+
+    private void ChangeCameraThird()
+    {
+        GameEventsManager.Instance.cameraEvents.CameraChangedToThirdPerson();
     }
 }

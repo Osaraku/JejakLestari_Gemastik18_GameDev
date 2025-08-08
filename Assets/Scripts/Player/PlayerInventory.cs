@@ -12,8 +12,6 @@ public class PlayerInventory
     public PlayerInventory(Action<Item> useItemAction)
     {
         itemList = new List<Item>();
-
-        AddItem(new Item { itemType = Item.ItemType.BottleTrash, amount = 1 });
     }
 
     public void AddItem(Item item)

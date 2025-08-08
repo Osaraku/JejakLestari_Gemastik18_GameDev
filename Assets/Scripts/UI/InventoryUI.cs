@@ -5,6 +5,8 @@ using TMPro;
 
 public class InventoryUI : MonoBehaviour
 {
+    [SerializeField] private GameObject visual;
+
     private PlayerInventory playerInventory;
     private Transform itemSlotContainer;
     private Transform itemSlotTemplate;
@@ -21,6 +23,19 @@ public class InventoryUI : MonoBehaviour
 
         GameEventsManager.Instance.inventoryEvents.onItemListChanged += Inventory_OnItemListChanged;
         RefreshInventoryItems();
+
+        GameEventsManager.Instance.cameraEvents.onCameraChangeToFirstPerson += Hide;
+        GameEventsManager.Instance.cameraEvents.onCameraChangeToThirdPerson += Show;
+    }
+
+    private void Show()
+    {
+        visual.SetActive(true);
+    }
+
+    private void Hide()
+    {
+        visual.SetActive(false);
     }
 
     private void Inventory_OnItemListChanged()

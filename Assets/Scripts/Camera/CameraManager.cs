@@ -7,44 +7,46 @@ public class CameraManager : MonoBehaviour
     [SerializeField] private GameObject firstPersonCamera;
     [SerializeField] private Animator cameraTransition;
 
-    private bool onFirstPerson;
-    private bool cameraLock;
-
     private void Start()
     {
         ActivateThirdPersonCamera();
-        GameEventsManager.Instance.cameraEvents.onCameraChange += ChangeCamera;
-        GameEventsManager.Instance.cameraEvents.onCameraTransition += CameraTransition;
     }
 
-    private void CameraTransition()
+    private void OnEnable()
+    {
+        GameEventsManager.Instance.cameraEvents.onCameraChangeToFirstPerson += ActivateFirstPersonCamera;
+        GameEventsManager.Instance.cameraEvents.onCameraChangeToThirdPerson += ActivateThirdPersonCamera;
+        GameEventsManager.Instance.cameraEvents.onCameraTransitionToFirstPerson += CameraTransitionToFirstPerson;
+        GameEventsManager.Instance.cameraEvents.onCameraTransitionToThirdPerson += CameraTransitionToThirdPerson;
+    }
+
+    private void OnDisable()
+    {
+        GameEventsManager.Instance.cameraEvents.onCameraChangeToFirstPerson -= ActivateFirstPersonCamera;
+        GameEventsManager.Instance.cameraEvents.onCameraChangeToThirdPerson -= ActivateThirdPersonCamera; ;
+        GameEventsManager.Instance.cameraEvents.onCameraTransitionToFirstPerson -= CameraTransitionToFirstPerson;
+        GameEventsManager.Instance.cameraEvents.onCameraTransitionToThirdPerson -= CameraTransitionToThirdPerson;
+    }
+
+    private void CameraTransitionToFirstPerson()
     {
         cameraTransition.SetTrigger("Change");
     }
 
-    public void ChangeCamera()
+    private void CameraTransitionToThirdPerson()
     {
-        if (onFirstPerson)
-        {
-            ActivateThirdPersonCamera();
-        }
-        else
-        {
-            ActivateFirstPersonCamera();
-        }
+        cameraTransition.SetTrigger("ChangeThird");
     }
 
     private void ActivateThirdPersonCamera()
     {
         thirdPersonCamera.SetActive(true);
         firstPersonCamera.SetActive(false);
-        onFirstPerson = false;
     }
 
     private void ActivateFirstPersonCamera()
     {
         firstPersonCamera.SetActive(true);
         thirdPersonCamera.SetActive(false);
-        onFirstPerson = true;
     }
 }

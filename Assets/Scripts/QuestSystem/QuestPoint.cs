@@ -3,6 +3,9 @@ using UnityEngine;
 
 public class QuestPoint : MonoBehaviour
 {
+    [Header("Dialogue (Optional)")]
+    [SerializeField] private string dialogueKnotName;
+
     [Header("Quest")]
     [SerializeField] private QuestInfoSO questInfoPoint;
     [SerializeField] private QuestIcon questIcon;
@@ -37,13 +40,20 @@ public class QuestPoint : MonoBehaviour
     {
         if (npcQuest.GetNPCName() == npcName)
         {
-            if (currentQuestState.Equals(QuestState.CAN_START) && startPoint)
+            if (!dialogueKnotName.Equals(""))
             {
-                GameEventsManager.Instance.questEvents.StartQuest(questId);
+                GameEventsManager.Instance.dialogueEvents.EnterDialogue(dialogueKnotName);
             }
-            else if (currentQuestState.Equals(QuestState.CAN_FINISH) && finishPoint)
+            else
             {
-                GameEventsManager.Instance.questEvents.FinishQuest(questId);
+                if (currentQuestState.Equals(QuestState.CAN_START) && startPoint)
+                {
+                    GameEventsManager.Instance.questEvents.StartQuest(questId);
+                }
+                else if (currentQuestState.Equals(QuestState.CAN_FINISH) && finishPoint)
+                {
+                    GameEventsManager.Instance.questEvents.FinishQuest(questId);
+                }
             }
         }
     }

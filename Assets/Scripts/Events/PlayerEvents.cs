@@ -2,21 +2,12 @@ using System;
 
 public class PlayerEvents
 {
-    public event Action onDisablePlayerMovement;
-    public void DisablePlayerMovement()
+    public event Action<bool> onPlayerMovementLock;
+    public void PlayerMovementLock(bool isLocked)
     {
-        if (onDisablePlayerMovement != null)
+        if (onPlayerMovementLock != null)
         {
-            onDisablePlayerMovement();
-        }
-    }
-
-    public event Action onEnablePlayerMovement;
-    public void EnablePlayerMovement()
-    {
-        if (onEnablePlayerMovement != null)
-        {
-            onEnablePlayerMovement();
+            onPlayerMovementLock(isLocked);
         }
     }
 

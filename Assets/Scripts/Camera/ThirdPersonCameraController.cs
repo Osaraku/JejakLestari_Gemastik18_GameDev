@@ -16,15 +16,18 @@ public class ThirdPersonCameraController : MonoBehaviour
 
     private CinemachineCamera cam;
     private CinemachineOrbitalFollow orbitalFollow;
+    private CinemachineInputAxisController inputAxisController;
     private Vector2 scrollDelta;
 
     private float targetZoom;
     private float currentZoom;
+    private bool isCameraLocked;
 
     private void Awake()
     {
         inputActions = new InputSystem_Actions();
         inputActions.Enable();
+
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -33,23 +36,61 @@ public class ThirdPersonCameraController : MonoBehaviour
         mouseZoomAction = InputSystem.actions.FindAction("MouseZoom");
         mouseZoomAction.performed += HandleMouseScroll;
 
+        isCameraLocked = false;
         Cursor.lockState = CursorLockMode.Locked;
 
         cam = GetComponent<CinemachineCamera>();
         orbitalFollow = cam.GetComponent<CinemachineOrbitalFollow>();
+        inputAxisController = cam.GetComponent<CinemachineInputAxisController>();
 
         targetZoom = currentZoom = orbitalFollow.Radius;
     }
 
+    private void OnEnable()
+    {
+        GameEventsManager.Instance.cameraEvents.onCameraLock += SetCameraLock;
+    }
+
+    private void OnDisable()
+    {
+        GameEventsManager.Instance.cameraEvents.onCameraLock -= SetCameraLock;
+    }
+
     private void HandleMouseScroll(InputAction.CallbackContext context)
     {
+        if (isCameraLocked)
+        {
+            return;
+        }
+
         scrollDelta = context.ReadValue<Vector2>();
+    }
+
+    private void SetCameraLock(bool isLocked)
+    {
+        isCameraLocked = isLocked;
+
+        inputAxisController.enabled = !isLocked;
+
+        if (isCameraLocked == true)
+        {
+            Cursor.lockState = CursorLockMode.None;
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+        }
     }
 
 
     // Update is called once per frame
     void Update()
     {
+        if (isCameraLocked)
+        {
+            return;
+        }
+
         if (scrollDelta.y != 0)
         {
             if (orbitalFollow != null)

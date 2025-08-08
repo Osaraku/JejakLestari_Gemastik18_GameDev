@@ -5,12 +5,14 @@ public class GameEventsManager : MonoBehaviour
 {
     public static GameEventsManager Instance { get; private set; }
 
+    public InputEvents inputEvents;
     public TrashEvents trashEvents;
     public InventoryEvents inventoryEvents;
     public PlayerEvents playerEvents;
     public NPCEvents npcEvents;
     public QuestEvents questEvents;
     public CameraEvents cameraEvents;
+    public DialogueEvents dialogueEvents;
 
     private void Awake()
     {
@@ -21,11 +23,13 @@ public class GameEventsManager : MonoBehaviour
         Instance = this;
 
         // initialize all events
+        inputEvents = new InputEvents();
         trashEvents = new TrashEvents();
         inventoryEvents = new InventoryEvents();
         playerEvents = new PlayerEvents();
         npcEvents = new NPCEvents();
         questEvents = new QuestEvents();
         cameraEvents = new CameraEvents();
+        dialogueEvents = new DialogueEvents();
     }
 }

@@ -17,6 +17,12 @@ public class QuestManager : MonoBehaviour
         questMap = CreateQuestMap();
     }
 
+    // Tambahkan fungsi ini di dalam class QuestManager
+    public Dictionary<string, Quest> GetQuestMap()
+    {
+        return questMap;
+    }
+
     private void OnEnable()
     {
         GameEventsManager.Instance.questEvents.onStartQuest += StartQuest;
