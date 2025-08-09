@@ -13,15 +13,15 @@ public class QuestJournalUI : MonoBehaviour
     private void OnEnable()
     {
         GameEventsManager.Instance.questEvents.onQuestStateChange += QuestStateChange;
-        GameEventsManager.Instance.cameraEvents.onCameraChangeToFirstPerson += Show;
-        GameEventsManager.Instance.cameraEvents.onCameraChangeToThirdPerson += Hide;
+        GameEventsManager.Instance.cameraEvents.onCameraChangeToFirstPersonJournal += Show;
+        GameEventsManager.Instance.cameraEvents.onCameraChangeToThirdPersonJournal += Hide;
     }
 
     private void OnDisable()
     {
         GameEventsManager.Instance.questEvents.onQuestStateChange -= QuestStateChange;
-        GameEventsManager.Instance.cameraEvents.onCameraChangeToFirstPerson -= Show;
-        GameEventsManager.Instance.cameraEvents.onCameraChangeToThirdPerson -= Hide;
+        GameEventsManager.Instance.cameraEvents.onCameraChangeToFirstPersonJournal -= Show;
+        GameEventsManager.Instance.cameraEvents.onCameraChangeToThirdPersonJournal -= Hide;
     }
 
     private void Show()

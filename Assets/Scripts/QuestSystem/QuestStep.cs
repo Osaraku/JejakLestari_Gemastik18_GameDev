@@ -16,7 +16,7 @@ public abstract class QuestStep : MonoBehaviour
         }
     }
 
-    protected void finishQuestStep()
+    protected void FinishQuestStep()
     {
         if (!isFinished)
         {

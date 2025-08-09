@@ -24,8 +24,10 @@ public class InventoryUI : MonoBehaviour
         GameEventsManager.Instance.inventoryEvents.onItemListChanged += Inventory_OnItemListChanged;
         RefreshInventoryItems();
 
-        GameEventsManager.Instance.cameraEvents.onCameraChangeToFirstPerson += Hide;
-        GameEventsManager.Instance.cameraEvents.onCameraChangeToThirdPerson += Show;
+        GameEventsManager.Instance.cameraEvents.onCameraChangeToFirstPersonJournal += Hide;
+        GameEventsManager.Instance.cameraEvents.onCameraChangeToThirdPersonJournal += Show;
+        GameEventsManager.Instance.cameraEvents.onCameraChangeToFirstPersonCamera += Hide;
+        GameEventsManager.Instance.cameraEvents.onCameraChangeToThirdPersonCamera += Show;
     }
 
     private void Show()

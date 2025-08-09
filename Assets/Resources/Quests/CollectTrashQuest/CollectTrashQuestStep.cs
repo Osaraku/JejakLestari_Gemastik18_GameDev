@@ -30,7 +30,7 @@ public class CollectTrashQuestStep : QuestStep
         }
         if (trashCollected >= trashToComplete)
         {
-            finishQuestStep();
+            FinishQuestStep();
         }
     }
 

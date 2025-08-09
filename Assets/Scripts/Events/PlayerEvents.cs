@@ -11,6 +11,24 @@ public class PlayerEvents
         }
     }
 
+    public event Action<int> onMoneyGained;
+    public void MoneyGained(int money)
+    {
+        if (onMoneyGained != null)
+        {
+            onMoneyGained(money);
+        }
+    }
+
+    public event Action<int> onMoneyChange;
+    public void MoneyChange(int money)
+    {
+        if (onMoneyChange != null)
+        {
+            onMoneyChange(money);
+        }
+    }
+
     public event Action<int> onExperienceGained;
     public void ExperienceGained(int experience)
     {

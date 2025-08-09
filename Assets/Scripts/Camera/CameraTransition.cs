@@ -6,11 +6,11 @@ public class CameraTransition : MonoBehaviour
 
     private void ChangeCameraFirst()
     {
-        GameEventsManager.Instance.cameraEvents.CameraChangedToFirstPerson();
+        GameEventsManager.Instance.cameraEvents.CameraChangedToFirstPersonJournal();
     }
 
     private void ChangeCameraThird()
     {
-        GameEventsManager.Instance.cameraEvents.CameraChangedToThirdPerson();
+        GameEventsManager.Instance.cameraEvents.CameraChangedToThirdPersonJournal();
     }
 }

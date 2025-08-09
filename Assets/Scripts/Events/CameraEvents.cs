@@ -3,39 +3,39 @@ using UnityEngine;
 
 public class CameraEvents
 {
-    public event Action onCameraChangeToFirstPerson;
-    public void CameraChangedToFirstPerson()
+    public event Action onCameraChangeToFirstPersonJournal;
+    public void CameraChangedToFirstPersonJournal()
     {
-        if (onCameraChangeToFirstPerson != null)
+        if (onCameraChangeToFirstPersonJournal != null)
         {
-            onCameraChangeToFirstPerson();
+            onCameraChangeToFirstPersonJournal();
         }
     }
 
-    public event Action onCameraTransitionToFirstPerson;
-    public void CameraTransitionedToFirstPerson()
+    public event Action onCameraTransitionToFirstPersonJournal;
+    public void CameraTransitionedToFirstPersonJournal()
     {
-        if (onCameraTransitionToFirstPerson != null)
+        if (onCameraTransitionToFirstPersonJournal != null)
         {
-            onCameraTransitionToFirstPerson();
+            onCameraTransitionToFirstPersonJournal();
         }
     }
 
-    public event Action onCameraChangeToThirdPerson;
-    public void CameraChangedToThirdPerson()
+    public event Action onCameraChangeToThirdPersonJournal;
+    public void CameraChangedToThirdPersonJournal()
     {
-        if (onCameraChangeToThirdPerson != null)
+        if (onCameraChangeToThirdPersonJournal != null)
         {
-            onCameraChangeToThirdPerson();
+            onCameraChangeToThirdPersonJournal();
         }
     }
 
-    public event Action onCameraTransitionToThirdPerson;
-    public void CameraTransitionedToThirdPerson()
+    public event Action onCameraTransitionToThirdPersonJournal;
+    public void CameraTransitionedToThirdPersonJournal()
     {
-        if (onCameraTransitionToThirdPerson != null)
+        if (onCameraTransitionToThirdPersonJournal != null)
         {
-            onCameraTransitionToThirdPerson();
+            onCameraTransitionToThirdPersonJournal();
         }
     }
 
@@ -45,6 +45,42 @@ public class CameraEvents
         if (onCameraLock != null)
         {
             onCameraLock(isLocked);
+        }
+    }
+
+    public event Action onCameraChangeToFirstPersonCamera;
+    public void CameraChangedToFirstPersonCamera()
+    {
+        if (onCameraChangeToFirstPersonCamera != null)
+        {
+            onCameraChangeToFirstPersonCamera();
+        }
+    }
+
+    public event Action onCameraTransitionToFirstPersonCamera;
+    public void CameraTransitionedToFirstPersonCamera()
+    {
+        if (onCameraTransitionToFirstPersonCamera != null)
+        {
+            onCameraTransitionToFirstPersonCamera();
+        }
+    }
+
+    public event Action onCameraChangeToThirdPersonCamera;
+    public void CameraChangedToThirdPersonCamera()
+    {
+        if (onCameraChangeToThirdPersonCamera != null)
+        {
+            onCameraChangeToThirdPersonCamera();
+        }
+    }
+
+    public event Action onCameraTransitionToThirdPersonCamera;
+    public void CameraTransitionedToThirdPersonCamera()
+    {
+        if (onCameraTransitionToThirdPersonCamera != null)
+        {
+            onCameraTransitionToThirdPersonCamera();
         }
     }
 }

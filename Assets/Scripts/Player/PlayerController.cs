@@ -172,12 +172,13 @@ public class PlayerController : MonoBehaviour
                 fpController.SetInitialRotation(transform.eulerAngles.y, transform.eulerAngles.x);
                 fpController.SetCanRotate(true);
 
-                GameEventsManager.Instance.cameraEvents.CameraTransitionedToFirstPerson();
+                GameEventsManager.Instance.cameraEvents.CameraTransitionedToFirstPersonCamera();
+                Debug.Log("pressed");
             }
             else
             {
                 cameraOrientation = thirdPersonCamera;
-                GameEventsManager.Instance.cameraEvents.CameraTransitionedToThirdPerson();
+                GameEventsManager.Instance.cameraEvents.CameraTransitionedToThirdPersonCamera();
             }
         }
 
@@ -190,14 +191,15 @@ public class PlayerController : MonoBehaviour
 
                 fpController.SetCanRotate(false);
                 canMove = false;
-                GameEventsManager.Instance.cameraEvents.CameraTransitionedToFirstPerson();
+                GameEventsManager.Instance.cameraEvents.CameraTransitionedToFirstPersonJournal();
+
             }
             else
             {
                 cameraOrientation = thirdPersonCamera;
                 Cursor.lockState = CursorLockMode.Locked;
                 canMove = true;
-                GameEventsManager.Instance.cameraEvents.CameraTransitionedToThirdPerson();
+                GameEventsManager.Instance.cameraEvents.CameraTransitionedToThirdPersonJournal();
             }
         }
     }

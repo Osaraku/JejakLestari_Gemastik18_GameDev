@@ -5,24 +5,28 @@ public class PlayerLevel : MonoBehaviour
     [Header("Configuration")]
     [SerializeField] private int startingLevel = 1;
     [SerializeField] private int startingExperience = 0;
-
-    private int currentLevel;
-    private int currentExperience;
+    [SerializeField] private int startingMoney = 50000;
+    public int currentLevel;
+    public int currentExperience;
+    public int currentMoney;
 
     private void Awake()
     {
         currentLevel = startingLevel;
         currentExperience = startingExperience;
+        currentMoney = startingMoney;
     }
 
     private void OnEnable()
     {
         GameEventsManager.Instance.playerEvents.onExperienceGained += ExperienceGained;
+        GameEventsManager.Instance.playerEvents.onMoneyGained += MoneyGained;
     }
 
     private void OnDisable()
     {
         GameEventsManager.Instance.playerEvents.onExperienceGained -= ExperienceGained;
+        GameEventsManager.Instance.playerEvents.onMoneyGained -= MoneyGained;
     }
 
     private void Start()
@@ -42,5 +46,11 @@ public class PlayerLevel : MonoBehaviour
             GameEventsManager.Instance.playerEvents.PlayerLevelChange(currentLevel);
         }
         GameEventsManager.Instance.playerEvents.PlayerExperienceChange(currentExperience);
+    }
+
+    private void MoneyGained(int money)
+    {
+        currentMoney += money;
+        GameEventsManager.Instance.playerEvents.MoneyChange(currentMoney);
     }
 }
