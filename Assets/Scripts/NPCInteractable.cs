@@ -1,17 +1,20 @@
 using System;
 using UnityEngine;
+using TMPro;
 
 public class NPCInteractable : MonoBehaviour, IInteractable
 {
     [SerializeField] private Animator animator;
     [SerializeField] private string npcName;
     [SerializeField] private string interactText;
+    [SerializeField] private TextMeshProUGUI nameText;
 
     private static int isIdlingHash = Animator.StringToHash("isIdling");
     private static int isTalkingHash = Animator.StringToHash("isTalking");
 
     private void Awake()
     {
+        nameText.text = npcName;
     }
 
     public void Interact()
