@@ -9,6 +9,7 @@ public class QuestPoint : MonoBehaviour
     [Header("Quest")]
     [SerializeField] private QuestInfoSO questInfoPoint;
     [SerializeField] private QuestIcon questIcon;
+    [SerializeField] private QuestIcon questIconMinimap;
     private NPCInteractable npcQuest;
 
     [Header("Config")]
@@ -65,6 +66,7 @@ public class QuestPoint : MonoBehaviour
         {
             currentQuestState = quest.state;
             questIcon.SetState(currentQuestState, startPoint, finishPoint);
+            questIconMinimap.SetState(currentQuestState, startPoint, finishPoint);
         }
     }
 }
