@@ -12,23 +12,25 @@
 -> END
 
 = canStart
-Halo, kamu mahasiswa KKM ya? Perkenalkan nama bapak Rudi
-Bapak butuh bantuan mu untuk membersihkan sungai ini dari sampah
-
+Halo, kamu mahasiswa KKN ya? Perkenalkan nama bapak, Rudi. Bapak sehari-hari berkegiatan disini.
+Coba lihat sungai ini, Nak. Dulu airnya jernih sekali, banyak kehidupan di sungai ini, tapi sekarang...
+Bapak butuh bantuan mu untuk membersihkan sungai ini dari sampah, Nak. Kalau sendirian, rasanya tidak akan sanggup. Apakah kamu mau menolong Bapak, Nak?
 * [Tentu saja saya bisa, Pak. Siap laksanakan!]
-    Terima kasih nak. Mari naik kapal bapak.
+    Syukurlah! Bapak senang sekali mendengarnya. Terima kasih nak. Mari naik kapal bapak. Kita akan menyusuri sungai sambil menngumpulkan sampah-sampah itu.
     ~ StartQuest("CleanRiverQuest")
 * [Maaf Pak, untuk saat ini sepertinya saya belum bisa melakukannya.]
-    Baiklah kalau begitu, aku paham kamu pasti sibuk dengan hal lainnya ya.
+    Yah..Baiklah kalau begitu, aku paham kamu pasti sibuk dengan hal lainnya ya.
 - -> END
 
 = canFinish
-Ah? Sudah dapat kotak p3k nya?
-* [Sudah, ini pak]
-    Kerja bagus sudah berhasil membantunya, aku tidak salah mempercayakan hal ini kepadamu nak!
+Hah...lihatlah hasil kerja keras kita, Nak. Perahu bapak ini memang jadi kotor begini dipenuhi sampah, tetapi sungainya jadi bisa bernapas dan memunjukan keindahannya lagi.
+* [Iya, Pak! Betul sekali. Yang penting sungai ini menjadi bersih seperti yang bapak bilang sebelumnya.]
+    Kerja bagus sekali, Nak! kamu sudah berhasil membantu bapak membersihkannya.
+    Bapak tidak salah mempercayakan hal ini kepadamu, Nak! Bapak tidak mungkin bisa membersihkan ini sendirian.
 ~ FinishQuest("CleanRiverQuest")
 -> END
 
 = finished
-Terima Kasih nak!
+Terima Kasih banyak, Nak! Berkat bantuanmu waktu itu, sekarang Bapak bisa berkegiatan di sungai ini dengan perasaan nyaman.
+Sekarang Bapak bisa menebar jala lagi tanpa takut tersangkut sampah. Ikan-ikan pun kelihatannya mulai kembali.
 -> END

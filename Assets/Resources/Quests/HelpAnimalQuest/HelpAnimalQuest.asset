@@ -15,7 +15,8 @@ MonoBehaviour:
   <id>k__BackingField: HelpAnimalQuest
   displayName: Menolong Kuda
   levelRequirement: 1
-  questPrerequisites: []
+  questPrerequisites:
+  - {fileID: 11400000, guid: e3860d38d755e60449a9beb2de45cca6, type: 2}
   questStepPrefabs:
   - {fileID: 72111883886836020, guid: c8eba65bd56bd0f40bd461088a00535d, type: 3}
   moneyReward: 20000

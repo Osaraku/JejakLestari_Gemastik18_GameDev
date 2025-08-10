@@ -5,11 +5,15 @@ using UnityEngine;
 public class HudUI : MonoBehaviour
 {
     [SerializeField] private GameObject visual;
+    [SerializeField] private GameObject boatVisual;
     [SerializeField] private GameObject moneyUI;
     [SerializeField] private TextMeshProUGUI moneyText;
     [SerializeField] private TextMeshProUGUI levelText;
     [SerializeField] private TextMeshProUGUI poinText;
     [SerializeField] private PlayerLevel playerLevel;
+    [SerializeField] private TextMeshProUGUI riverCleanText;
+
+    private int trashCollected = 0;
 
 
     private void Start()
@@ -17,6 +21,8 @@ public class HudUI : MonoBehaviour
         moneyText.text = playerLevel.currentMoney.ToString();
         levelText.text = playerLevel.currentLevel.ToString();
         poinText.text = playerLevel.currentExperience.ToString();
+
+        BoatHide();
     }
 
     void OnEnable()
@@ -32,6 +38,10 @@ public class HudUI : MonoBehaviour
 
         GameEventsManager.Instance.playerEvents.onPlayerModeChangeToHuman += Show;
         GameEventsManager.Instance.playerEvents.onPlayerModeChangeToBoat += Hide;
+        GameEventsManager.Instance.playerEvents.onPlayerModeChangeToHuman += BoatHide;
+        GameEventsManager.Instance.playerEvents.onPlayerModeChangeToBoat += BoatShow;
+
+        GameEventsManager.Instance.trashEvents.onRiverTrashCollected += RiverTrashCollected;
     }
 
     void OnDisable()
@@ -47,6 +57,16 @@ public class HudUI : MonoBehaviour
 
         GameEventsManager.Instance.playerEvents.onPlayerModeChangeToHuman -= Show;
         GameEventsManager.Instance.playerEvents.onPlayerModeChangeToBoat -= Hide;
+        GameEventsManager.Instance.playerEvents.onPlayerModeChangeToHuman -= BoatHide;
+        GameEventsManager.Instance.playerEvents.onPlayerModeChangeToBoat -= BoatShow;
+
+        GameEventsManager.Instance.trashEvents.onRiverTrashCollected -= RiverTrashCollected;
+    }
+
+    private void RiverTrashCollected()
+    {
+        trashCollected++;
+        riverCleanText.text = "Terambil " + trashCollected + "/" + "20 \nSampah";
     }
 
     private void Hide()
@@ -57,6 +77,16 @@ public class HudUI : MonoBehaviour
     private void Show()
     {
         visual.SetActive(true);
+    }
+
+    private void BoatHide()
+    {
+        boatVisual.SetActive(false);
+    }
+
+    private void BoatShow()
+    {
+        boatVisual.SetActive(true);
     }
 
     private void ExperienceChange(int exp)

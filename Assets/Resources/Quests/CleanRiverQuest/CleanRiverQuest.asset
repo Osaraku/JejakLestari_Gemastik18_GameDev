@@ -15,7 +15,8 @@ MonoBehaviour:
   <id>k__BackingField: CleanRiverQuest
   displayName: Membersihkan Sungai
   levelRequirement: 1
-  questPrerequisites: []
+  questPrerequisites:
+  - {fileID: 11400000, guid: e3860d38d755e60449a9beb2de45cca6, type: 2}
   questStepPrefabs:
   - {fileID: 5279521666318308140, guid: 6a5ebf5210078994d9ba74b34204d670, type: 3}
   moneyReward: 50000

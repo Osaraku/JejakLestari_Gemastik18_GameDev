@@ -44,3 +44,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 753ef775432989a46a5db7c24713401d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  roverTrashCollected: 0
+  riverTrashToComplete: 20
