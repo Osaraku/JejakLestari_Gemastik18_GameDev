@@ -173,12 +173,14 @@ public class PlayerController : MonoBehaviour
                 fpController.SetCanRotate(true);
 
                 GameEventsManager.Instance.cameraEvents.CameraTransitionedToFirstPersonCamera();
+                GameEventsManager.Instance.inputEvents.ChangeInputEventContext(InputEventContext.CAMERA);
                 Debug.Log("pressed");
             }
             else
             {
                 cameraOrientation = thirdPersonCamera;
                 GameEventsManager.Instance.cameraEvents.CameraTransitionedToThirdPersonCamera();
+                GameEventsManager.Instance.inputEvents.ChangeInputEventContext(InputEventContext.DEFAULT);
             }
         }
 

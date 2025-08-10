@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class HudUI : MonoBehaviour
 {
+    [SerializeField] private GameObject visual;
     [SerializeField] private GameObject moneyUI;
     [SerializeField] private TextMeshProUGUI moneyText;
     [SerializeField] private TextMeshProUGUI levelText;
@@ -23,6 +24,11 @@ public class HudUI : MonoBehaviour
         GameEventsManager.Instance.playerEvents.onMoneyChange += MoneyChange;
         GameEventsManager.Instance.playerEvents.onPlayerLevelChange += LevelChange;
         GameEventsManager.Instance.playerEvents.onPlayerExperienceChange += ExperienceChange;
+
+        GameEventsManager.Instance.cameraEvents.onCameraChangeToFirstPersonJournal += Hide;
+        GameEventsManager.Instance.cameraEvents.onCameraChangeToThirdPersonJournal += Show;
+        GameEventsManager.Instance.cameraEvents.onCameraChangeToFirstPersonCamera += Hide;
+        GameEventsManager.Instance.cameraEvents.onCameraChangeToThirdPersonCamera += Show;
     }
 
     void OnDisable()
@@ -30,6 +36,21 @@ public class HudUI : MonoBehaviour
         GameEventsManager.Instance.playerEvents.onMoneyChange -= MoneyChange;
         GameEventsManager.Instance.playerEvents.onPlayerLevelChange -= LevelChange;
         GameEventsManager.Instance.playerEvents.onPlayerExperienceChange -= ExperienceChange;
+
+        GameEventsManager.Instance.cameraEvents.onCameraChangeToFirstPersonJournal -= Hide;
+        GameEventsManager.Instance.cameraEvents.onCameraChangeToThirdPersonJournal -= Show;
+        GameEventsManager.Instance.cameraEvents.onCameraChangeToFirstPersonCamera -= Hide;
+        GameEventsManager.Instance.cameraEvents.onCameraChangeToThirdPersonCamera -= Show; ;
+    }
+
+    private void Hide()
+    {
+        visual.SetActive(false);
+    }
+
+    private void Show()
+    {
+        visual.SetActive(true);
     }
 
     private void ExperienceChange(int exp)
