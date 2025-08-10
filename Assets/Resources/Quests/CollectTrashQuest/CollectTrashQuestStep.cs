@@ -4,7 +4,7 @@ using UnityEngine;
 public class CollectTrashQuestStep : QuestStep
 {
     private int trashCollected = 0;
-    private int trashToComplete = 5;
+    private int trashToComplete = 10;
 
     private void Start()
     {

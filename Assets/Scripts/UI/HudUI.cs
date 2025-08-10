@@ -29,6 +29,9 @@ public class HudUI : MonoBehaviour
         GameEventsManager.Instance.cameraEvents.onCameraChangeToThirdPersonJournal += Show;
         GameEventsManager.Instance.cameraEvents.onCameraChangeToFirstPersonCamera += Hide;
         GameEventsManager.Instance.cameraEvents.onCameraChangeToThirdPersonCamera += Show;
+
+        GameEventsManager.Instance.playerEvents.onPlayerModeChangeToHuman += Show;
+        GameEventsManager.Instance.playerEvents.onPlayerModeChangeToBoat += Hide;
     }
 
     void OnDisable()
@@ -40,7 +43,10 @@ public class HudUI : MonoBehaviour
         GameEventsManager.Instance.cameraEvents.onCameraChangeToFirstPersonJournal -= Hide;
         GameEventsManager.Instance.cameraEvents.onCameraChangeToThirdPersonJournal -= Show;
         GameEventsManager.Instance.cameraEvents.onCameraChangeToFirstPersonCamera -= Hide;
-        GameEventsManager.Instance.cameraEvents.onCameraChangeToThirdPersonCamera -= Show; ;
+        GameEventsManager.Instance.cameraEvents.onCameraChangeToThirdPersonCamera -= Show;
+
+        GameEventsManager.Instance.playerEvents.onPlayerModeChangeToHuman -= Show;
+        GameEventsManager.Instance.playerEvents.onPlayerModeChangeToBoat -= Hide;
     }
 
     private void Hide()

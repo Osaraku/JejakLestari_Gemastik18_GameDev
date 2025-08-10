@@ -55,4 +55,22 @@ public class PlayerEvents
             onPlayerExperienceChange(experience);
         }
     }
+
+    public event Action onPlayerModeChangeToBoat;
+    public void PlayerModeChangeToBoat()
+    {
+        if (onPlayerModeChangeToBoat != null)
+        {
+            onPlayerModeChangeToBoat();
+        }
+    }
+
+    public event Action onPlayerModeChangeToHuman;
+    public void PlayerModeChangeToHuman()
+    {
+        if (onPlayerModeChangeToHuman != null)
+        {
+            onPlayerModeChangeToHuman();
+        }
+    }
 }

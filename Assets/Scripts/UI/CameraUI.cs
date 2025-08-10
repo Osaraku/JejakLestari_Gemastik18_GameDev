@@ -32,6 +32,7 @@ public class CameraUI : MonoBehaviour
     {
         GameEventsManager.Instance.cameraEvents.onCameraChangeToFirstPersonCamera -= Show;
         GameEventsManager.Instance.cameraEvents.onCameraChangeToThirdPersonCamera -= Hide;
+        GameEventsManager.Instance.inputEvents.onClickPressed -= PhotoPressed;
     }
 
     private void Show()

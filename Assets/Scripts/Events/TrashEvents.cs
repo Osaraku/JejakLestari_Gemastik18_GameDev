@@ -10,4 +10,13 @@ public class TrashEvents
             onTrashCollected();
         }
     }
+
+    public event Action onRiverTrashCollected;
+    public void RiverTrashCollected()
+    {
+        if (onRiverTrashCollected != null)
+        {
+            onRiverTrashCollected();
+        }
+    }
 }

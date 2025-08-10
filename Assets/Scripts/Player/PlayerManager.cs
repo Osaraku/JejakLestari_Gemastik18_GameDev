@@ -1,16 +1,36 @@
+using System;
+using Unity.Cinemachine;
 using UnityEngine;
 
 public class PlayerManager : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    [SerializeField] private GameObject humanPlayer;
+    [SerializeField] private GameObject boatPlayer;
+    [SerializeField] private CinemachineCamera ThirdPersonCamera;
+
+    private void OnEnable()
     {
-        
+        GameEventsManager.Instance.playerEvents.onPlayerModeChangeToBoat += ChangePlayerToBoat;
+        GameEventsManager.Instance.playerEvents.onPlayerModeChangeToHuman += ChangePlayerToHuman;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnDisable()
     {
-        
+        GameEventsManager.Instance.playerEvents.onPlayerModeChangeToBoat -= ChangePlayerToBoat;
+        GameEventsManager.Instance.playerEvents.onPlayerModeChangeToHuman -= ChangePlayerToHuman;
+    }
+
+    private void ChangePlayerToBoat()
+    {
+        boatPlayer.SetActive(true);
+        humanPlayer.SetActive(false);
+        ThirdPersonCamera.Follow = boatPlayer.transform;
+    }
+
+    private void ChangePlayerToHuman()
+    {
+        humanPlayer.SetActive(true);
+        boatPlayer.SetActive(false);
+        ThirdPersonCamera.Follow = humanPlayer.transform;
     }
 }

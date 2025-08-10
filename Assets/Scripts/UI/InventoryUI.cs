@@ -28,6 +28,8 @@ public class InventoryUI : MonoBehaviour
         GameEventsManager.Instance.cameraEvents.onCameraChangeToThirdPersonJournal += Show;
         GameEventsManager.Instance.cameraEvents.onCameraChangeToFirstPersonCamera += Hide;
         GameEventsManager.Instance.cameraEvents.onCameraChangeToThirdPersonCamera += Show;
+        GameEventsManager.Instance.playerEvents.onPlayerModeChangeToHuman += Show;
+        GameEventsManager.Instance.playerEvents.onPlayerModeChangeToBoat += Hide;
     }
 
     private void Show()

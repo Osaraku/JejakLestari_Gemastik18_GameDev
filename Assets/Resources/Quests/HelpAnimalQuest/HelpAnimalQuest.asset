@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: HelpAnimalQuest
   m_EditorClassIdentifier: 
   <id>k__BackingField: HelpAnimalQuest
-  displayName: Menolong Rusa
+  displayName: Menolong Kuda
   levelRequirement: 1
   questPrerequisites: []
   questStepPrefabs:

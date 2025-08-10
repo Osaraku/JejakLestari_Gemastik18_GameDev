@@ -133,6 +133,7 @@ public class QuestManager : MonoBehaviour
     private void ClaimReward(Quest quest)
     {
         GameEventsManager.Instance.playerEvents.ExperienceGained(quest.info.experienceReward);
+        GameEventsManager.Instance.playerEvents.MoneyGained(quest.info.moneyReward);
     }
 
     private Dictionary<string, Quest> CreateQuestMap()
